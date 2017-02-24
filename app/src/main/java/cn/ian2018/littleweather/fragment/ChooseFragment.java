@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.ian2018.littleweather.R;
+import cn.ian2018.littleweather.activity.MainActivity;
 import cn.ian2018.littleweather.activity.WeatherActivity;
 import cn.ian2018.littleweather.db.City;
 import cn.ian2018.littleweather.db.County;
@@ -28,6 +29,7 @@ import cn.ian2018.littleweather.util.Constant;
 import cn.ian2018.littleweather.util.HttpUtil;
 import cn.ian2018.littleweather.util.JsonUtil;
 import cn.ian2018.littleweather.util.Logs;
+import cn.ian2018.littleweather.util.SharedPreferencesUtil;
 import cn.ian2018.littleweather.util.ToastUtil;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -91,11 +93,19 @@ public class ChooseFragment extends Fragment {
                     queryCounty();
                 } else if (currentLevel == LEVEL_COUNTY){
                     String weatherId = countyList.get(i).getWeatherId();
-                    // 跳转页面
-                    Intent intent = new Intent(getActivity(), WeatherActivity.class);
-                    intent.putExtra("weather_id", weatherId);
-                    startActivity(intent);
-                    getActivity().finish();
+                    SharedPreferencesUtil.putString("weather_id", weatherId);
+                    // 如果当前activity属于MainActivity
+                    if (getActivity() instanceof MainActivity) {
+                        // 跳转页面
+                        startActivity(new Intent(getActivity(), WeatherActivity.class));
+                        getActivity().finish();
+                    // 如果当前activity属于WeatherActivity
+                    } else if (getActivity() instanceof WeatherActivity) {
+                        WeatherActivity weatherActivity = (WeatherActivity) getActivity();
+                        weatherActivity.drawerLayout.closeDrawers();
+                        weatherActivity.swipeRefresh.setRefreshing(true);
+                        weatherActivity.requestWeather(weatherId);
+                    }
                 }
             }
         });
