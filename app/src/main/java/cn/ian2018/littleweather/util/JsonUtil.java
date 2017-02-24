@@ -1,5 +1,7 @@
 package cn.ian2018.littleweather.util;
 
+import com.google.gson.Gson;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -7,6 +9,7 @@ import org.json.JSONObject;
 import cn.ian2018.littleweather.db.City;
 import cn.ian2018.littleweather.db.County;
 import cn.ian2018.littleweather.db.Province;
+import cn.ian2018.littleweather.gson.Weather;
 
 /**
  * Created by Administrator on 2017/2/24/024.
@@ -21,6 +24,7 @@ public class JsonUtil {
     public static boolean handleProvinceResponse(String response){
         if (!response.equals("")) {
             try {
+                Logs.d(response);
                 JSONArray allProvince = new JSONArray(response);
                 for (int i=0; i < allProvince.length(); i++) {
                     JSONObject provinceObject = allProvince.getJSONObject(i);
@@ -85,5 +89,22 @@ public class JsonUtil {
             }
         }
         return false;
+    }
+
+    /**
+     * 解析天气数据
+     * @param response 返回的json数据
+     * @return 返回Weather实例
+     */
+    public static Weather handleWeatherResponse(String response) {
+        try {
+            JSONObject jsonObject = new JSONObject(response);
+            JSONArray jsonArray = jsonObject.getJSONArray("HeWeather");
+            String weatherInfo = jsonArray.getJSONObject(0).toString();
+            return new Gson().fromJson(weatherInfo ,Weather.class);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
