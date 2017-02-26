@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.ian2018.littleweather.R;
-import cn.ian2018.littleweather.activity.MainActivity;
 import cn.ian2018.littleweather.activity.WeatherActivity;
 import cn.ian2018.littleweather.db.City;
 import cn.ian2018.littleweather.db.County;
@@ -94,18 +93,9 @@ public class ChooseFragment extends Fragment {
                 } else if (currentLevel == LEVEL_COUNTY){
                     String weatherId = countyList.get(i).getWeatherId();
                     SharedPreferencesUtil.putString("weather_id", weatherId);
-                    // 如果当前activity属于MainActivity
-                    if (getActivity() instanceof MainActivity) {
-                        // 跳转页面
-                        startActivity(new Intent(getActivity(), WeatherActivity.class));
-                        getActivity().finish();
-                    // 如果当前activity属于WeatherActivity
-                    } else if (getActivity() instanceof WeatherActivity) {
-                        WeatherActivity weatherActivity = (WeatherActivity) getActivity();
-                        weatherActivity.drawerLayout.closeDrawers();
-                        weatherActivity.swipeRefresh.setRefreshing(true);
-                        weatherActivity.requestWeather(weatherId);
-                    }
+                    // 这里直接跳转页面 根据intent的携带信息判断是从哪跳转的
+                    startActivity(new Intent(getActivity(), WeatherActivity.class));
+                    getActivity().finish();
                 }
             }
         });

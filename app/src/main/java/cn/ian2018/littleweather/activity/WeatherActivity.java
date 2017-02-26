@@ -4,11 +4,13 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -56,6 +58,7 @@ public class WeatherActivity extends AppCompatActivity {
     private TextView carWashText;
     private TextView sportText;
     private String mWeatherId;
+    private NavigationView navigation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +80,14 @@ public class WeatherActivity extends AppCompatActivity {
         if (weatherString != null) {
             Logs.d("加载的缓存信息");
             Weather weather = JsonUtil.handleWeatherResponse(weatherString);
-            showWeatherInfo(weather);
+            // 如果weatherId和缓存中的相同 就加载缓存信息
+            if (mWeatherId.equals(weather.basic.weatherId)) {
+                showWeatherInfo(weather);
+            } else {
+                // 从服务器获取天气信息
+                weatherLayout.setVisibility(View.INVISIBLE);
+                requestWeather(mWeatherId);
+            }
         } else {
             // 从服务器获取天气信息
             weatherLayout.setVisibility(View.INVISIBLE);
@@ -193,6 +203,7 @@ public class WeatherActivity extends AppCompatActivity {
         bingPicImage = (ImageView) findViewById(R.id.bing_pic_image);
         swipeRefresh = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        navigation = (NavigationView) findViewById(R.id.navigation);
         weatherLayout = (ScrollView) findViewById(R.id.weather_layout);
         homeButton = (Button) findViewById(R.id.home_button);
         cityNameText = (TextView) findViewById(R.id.city_name_text);
@@ -223,6 +234,29 @@ public class WeatherActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 drawerLayout.openDrawer(GravityCompat.START);
+            }
+        });
+
+        // 配置菜单头布局
+        navigation.inflateHeaderView(R.layout.menu_nav_head);
+        // 设置滑动菜单点击事件
+        navigation.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem menuItem) {
+                int id = menuItem.getItemId();
+                switch (id) {
+                    case R.id.navItem1: // 选择城市
+                        Intent intent = new Intent(WeatherActivity.this, MainActivity.class);
+                        intent.putExtra("code", 200);
+                        startActivity(intent);
+                        finish();
+                        break;
+                    case R.id.navItem2: // 意见反馈
+                        break;
+                    case R.id.navItem3: // 设置
+                        break;
+                }
+                return false;
             }
         });
 

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="all">
+
+        <item
+            android:id="@+id/navItem1"
+            android:icon="@drawable/ic_choose"
+            android:title="@string/choose_city" />
+        <item
+            android:id="@+id/navItem2"
+            android:icon="@drawable/ic_feedback"
+            android:title="@string/feed_back" />
+
+        <item
+            android:id="@+id/navItem3"
+            android:icon="@drawable/ic_setting"
+            android:title="@string/setting" />
+    </group>
+</menu>
