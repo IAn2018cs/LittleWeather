@@ -7,5 +7,9 @@
     <string name="suggestion">生活建议</string>
     <string name="choose_city">选择城市</string>
     <string name="feed_back">意见反馈</string>
-    <string name="setting">设置</string>
+    <string name="about">关于</string>
+    <string name="feedback_edit_text">请输入您的反馈消息</string>
+    <string name="submit_button">提 交</string>
+    <string name="about_info">作者：Mr.Chen\n开始制作时间：2017年2月22日\n完成时间：2017年2月27日\n功能简介：本可以任意选择全国省市县，查询当地的天气情况，天气内容包含了当前的天气状况，未来几天的天气状况，空气质量，和生活小建议。每日更换背景图，让您的应用每天都焕然一新。支持手动更新天气信息和后台更新天气信息。\n作者简介：2015级学生，本科在读，软件工程专业。热爱编程，喜欢Android，还在这条道路上奋勇向前。\n联系我：chenshuai@ian2018.cn\n</string>
+    <string name="blog">\n—— ian2018.cn</string>
 </resources>

@@ -23,6 +23,11 @@ public class Constant {
     public static final String PIC_URL = "http://guolin.tech/api/bing_pic";
 
     /**
+     * 必应每日一图接口地址
+     */
+    public static final String COND_ICON_URL = "http://files.heweather.com/cond_icon/";
+
+    /**
      * 和风天气api个人认证key
      */
     public static final String WEATHER_KEY = "a889717fe3f044359c6c736d1c5b14df";
@@ -30,10 +35,20 @@ public class Constant {
     /**
      * 腾讯广告联盟应用id
      */
-    public static final String APP_ID = "1105585573";
+    public static final String APP_ID = "1105431900";
 
     /**
      * 腾讯广告联盟广告位id
      */
-    public static final String AD_ID = "4010212448179536";
+    public static final String AD_ID = "2010529073625641";
+
+    /**
+     * Bmob应用id
+     */
+    public static final String BMOB_APP_ID = "6bb44abd3b5c879ec498558b496ce119";
+
+    /**
+     * bmob更新表的数据id
+     */
+    public static final String UPDATE_OBJECT_ID = "yqJc888v";
 }

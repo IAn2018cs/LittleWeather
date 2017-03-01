@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:name=".MyApplication"
@@ -25,6 +26,8 @@
         </activity>
         <activity android:name=".activity.MainActivity" />
         <activity android:name=".activity.WeatherActivity" />
+        <activity android:name=".activity.FeedbackActivity" />
+        <activity android:name=".activity.AboutActivity" />
 
         <service android:name=".service.AutoUpdateService" />
         <service

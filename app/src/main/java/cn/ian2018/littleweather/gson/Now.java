@@ -13,8 +13,16 @@ public class Now {
     @SerializedName("cond")
     public More more;
 
+    public Wind wind;
+
     public class More {
+        public String code;
         @SerializedName("txt")
+        public String info;
+    }
+
+    public class Wind {
+        @SerializedName("dir")
         public String info;
     }
 }

@@ -15,6 +15,12 @@ public class Suggestion {
 
     public Sport sport;
 
+    @SerializedName("drsg")
+    public DressingAdvice dressingAdvice;
+
+    @SerializedName("flu")
+    public Sick sick;
+
     public class Comfort {
         @SerializedName("txt")
         public String info;
@@ -30,4 +36,13 @@ public class Suggestion {
         public String info;
     }
 
+    public class DressingAdvice {
+        @SerializedName("txt")
+        public String info;
+    }
+
+    public class Sick {
+        @SerializedName("txt")
+        public String info;
+    }
 }
